@@ -1,0 +1,3 @@
+minikube delete
+minikube start
+ k port-forward my-pod 8080:80  -n dev-namespace 

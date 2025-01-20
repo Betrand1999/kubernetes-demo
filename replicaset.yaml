@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset            # Name of the ReplicaSet
+  namespace: dev-namespace           # Namespace where it will be deployed
+spec:
+  replicas: 2                        # Number of replicas
+  selector:
+    matchLabels:
+      app: myapp                     # Selector to match the pods managed by this ReplicaSet
+  template:
+    metadata:
+      labels:
+        app: myapp                   # Label to identify the pods
+    spec:
+      containers:
+        - name: myapp
+          image: httpd:latest    # Image for the container
+          ports:
+            - containerPort: 80      # Container port exposed by the app

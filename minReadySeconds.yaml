@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minready-second-deploy
+  namespace: dev-namespace
+spec:
+  replicas: 2
+  minReadySeconds: 60  # Minimum time for a pod to be considered ready
+  selector:
+    matchLabels:
+      app: demo  # This should match the labels in the template
+  template:
+    metadata:
+      labels:
+        app: demo  # This label matches the selector
+    spec:
+      containers:
+      - name: demo-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10

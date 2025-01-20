@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myapp-controller         # Name of the ReplicationController
+  namespace: dev-namespace       # Namespace where it will be deployed
+spec:
+  replicas: 2                    # Number of replicas
+  selector:
+    app: myapp                   # Selector to match the pods managed by this ReplicationController
+  template:
+    metadata:
+      labels:
+        app: myapp               # Label to identify the pods
+    spec:
+      containers:
+        - name: myapp
+          image: httpd:latest # Image for the container
+          ports:
+            - containerPort: 80  # Container port exposed by the app

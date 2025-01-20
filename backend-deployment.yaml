@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-config-map
+  namespace: dev-namespace
+spec:
+  selector:
+    matchLabels:
+      app: configmap-deploy
+  template:
+    metadata:
+      labels:
+        app: configmap-deploy
+    spec:
+      containers:
+      - name: myapp
+        image: httpd
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: my-config-map

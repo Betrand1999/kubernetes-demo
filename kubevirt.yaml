@@ -1,0 +1,39 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm
+  namespace: kubevirt  # Replace this with the desired namespace
+
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: test-vm
+    spec:
+      domain:
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: containerdisk
+        resources:
+          requests:
+            memory: 64Mi
+      volumes:
+      - name: containerdisk
+        containerDisk:
+          image: kubevirt/cirros-container-disk-demo
+
+
+
+
+
+
+
+
+
+
+
+
+Know About DevOps Metrics and KPIs

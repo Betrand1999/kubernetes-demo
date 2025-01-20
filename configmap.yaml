@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config-map
+  namespace: dev-namespace
+data:
+  MONGO_USERNAME: betrand1999
+  MONGO_HOST: mmutagha.com
+  MONG_PORT: D2037

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-pv-deploy
+  namespace: dev-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-pv-deploy
+  template:
+    metadata:
+      labels:
+        app: my-pv-deploy
+    spec:
+      containers:
+        - name: my-container
+          image: nginx
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: example-storage
+      volumes:
+        - name: example-storage
+          persistentVolumeClaim:
+            claimName: my-pvc

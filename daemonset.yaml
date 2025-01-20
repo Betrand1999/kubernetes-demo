@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+  namespace: dev-namespace    # Specify the namespace
+  annotations:
+   email: mmutagha.com
+  labels:
+    app: my-daemonset
+spec:
+  selector:
+    matchLabels:
+      app: my-daemonset
+  template:
+    metadata:
+      labels:
+        app: my-daemonset
+    spec:
+      containers:
+        - name: httpd
+          image: httpd                 # Example image
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
